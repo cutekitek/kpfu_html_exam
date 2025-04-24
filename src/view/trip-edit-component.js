@@ -1,28 +1,18 @@
 import AbstractComponent from '../framework/view/abstract-component.js';
 
 export default class TripEditComponent extends AbstractComponent {
-    constructor(trip, genres) {
+    constructor(trip) {
         super();
         this._trip = trip;
-        this._genres = genres;
     }
 
     get template() {
-        const options = this._genres
-            .map(genre => {
-                const selected = genre === this._trip.genre ? ' selected' : '';
-                return '<option value="' + genre + '"' + selected + '>' + genre + '</option>';
-            })
-            .join('');
         return `
       <li class="trip-item-edit" data-id="${this._trip.id}">
         <div class="trip-details-edit">
-          <input type="text" class="trip-edit__title" value="${this._trip.destination}" required />
-          <input type="date" class="trip-edit__author" value="${this._trip.date}" required />
-          <textarea id="trip-notes" placeholder="Notes" rows="3">${this._trip.note}</textarea>
-          <select class="trip-edit__genre" required>
-            ${options}
-          </select>
+          <input type="text" class="trip-edit__destination" value="${this._trip.destination}" required />
+          <input type="date" class="trip-edit__date" value="${this._trip.date.toISOString().split('T')[0]}" required />
+          <textarea class="trip-edit__note" placeholder="Notes" rows="3">${this._trip.note}</textarea>
         </div>
         <div>
           <button class="trip-edit__save">Сохранить</button>
@@ -32,10 +22,10 @@ export default class TripEditComponent extends AbstractComponent {
     }
 
     getData() {
-        const title = this.element.querySelector('.trip-edit__title').value;
-        const author = this.element.querySelector('.trip-edit__author').value;
-        const genre = this.element.querySelector('.trip-edit__genre').value;
-        return { title, author, genre };
+        const destination = this.element.querySelector('.trip-edit__destination').value;
+        const date = this.element.querySelector('.trip-edit__date').value;
+        const note = this.element.querySelector('.trip-edit__note').value;
+        return { destination: destination, date: new Date(date), note: note };
     }
 
     setSaveHandler(handler) {

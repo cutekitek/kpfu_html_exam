@@ -16,6 +16,7 @@ export default class TripItemComponent extends AbstractComponent {
         </div>
         <div>
           <button class="trip-item__delete">Удалить</button>
+          <button class="trip-item__edit">Редактировать</button>
         </div>
       </li>`;
     }
@@ -25,6 +26,6 @@ export default class TripItemComponent extends AbstractComponent {
     }
 
     setEditHandler(handler) {
-        // this.element.querySelector('.trip-item__edit').addEventListener('click', handler);
+        this.element.querySelector('.trip-item__edit').addEventListener('click', handler);
     }
 }

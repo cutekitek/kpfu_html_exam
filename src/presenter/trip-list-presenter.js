@@ -43,7 +43,7 @@ export default class TripListPresenter {
             item.setDeleteHandler(() => this._tripModel.removeTrip(trip.id));
 
             item.setEditHandler(() => {
-                const editComponent = new TripEditComponent(trip, GENRES);
+                const editComponent = new TripEditComponent(trip);
                 const editEl = editComponent.element;
                 listEl.replaceChild(editEl, item.element);
 
